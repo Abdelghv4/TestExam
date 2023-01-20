@@ -1,0 +1,20 @@
+.dropdown-content{
+    top: 45px;
+    left: 25px;
+}
+#head input{
+    bottom: 55px;
+}
+#srchBtn{
+    bottom: 55px;
+}
+#switch,#log,#sign{
+    bottom: 105px;
+    left: 1360px;
+}
+#switch{
+    bottom: 102px;
+}
+#cat{
+    top: 5px;
+}

@@ -1,0 +1,88 @@
+
+<head>
+<script src="jquery-3.6.0.min.js"></script>
+</head>
+
+<style> 
+h1{
+    text-align:center;
+}
+#description{
+    border: 2px solid #06bbce;
+    width: 82%;
+    word-wrap: normal;
+    position: absolute;
+    left: 140px;
+    TOP: 220px;
+}
+#sv{
+  position: absolute;
+  right: 850px; 
+  bottom: 470px; 
+}
+#sln{
+    position: absolute;
+  right: 690px; 
+  bottom: 470px; 
+}
+#dsln{
+    border: 2px solid #06bbce;
+    width: 82%;
+    word-wrap: normal;
+    position: absolute;
+    left: 140px;
+    TOP: 320px;
+}
+#fSuggest{
+    position: absolute;
+    right: 510px;
+    bottom: 200px;
+}
+#subDesc{
+    position: absolute;
+    right: 270px;
+}
+
+</style>
+<form method="POST" action="exPage.phtml"><h1><?php echo $row['name']; ?></h1>
+<p id="description"> <?php echo $row['description']; ?></p>
+<input id="sln" type="button" value="solution&#9873;">
+<p id="dsln" ><?php echo $row['description1']; ?></p>
+</form>
+<button type="submit" id="sv" name="savex" >save&#10003;</button>
+<form id="fSuggest" method="POST">
+    <h5>suggest your solution : </h5>
+<textarea name="suggestion" cols="70" rows="5"></textarea><br>
+<button type="submit" name="submitSln"  ID="subDesc">Submit</button>
+</form>
+<script>
+    $(document).ready(function()
+    {
+        $("#sln").click(function(){
+            $("#dsln").slideToggle();
+        });
+
+        $("#sv").click(function(){
+            $("#sv").css({"background-color":"green","color":"white"});
+            $("#sv").text("Saved");
+        })
+    })
+</script>
+<?php
+if(isset($_POST['submitSln']))
+{ 
+    $nbr=$_GET['nbr'];
+    $desc=$_POST['suggestion'];
+    $test=new user();
+    $test->sendSolution($nbr,$desc,intval($_SESSION['sessionId']));
+}
+
+if(isset($_GET['nbr']))
+{ 
+    $nbr=$_GET['nbr'];
+    $id=$_SESSION['sessionId'];
+    $test=new exercice();
+    $test->saveEx($id,$nbr);
+}
+?>
+
